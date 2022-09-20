@@ -1,20 +1,43 @@
-function Books() {
-  // object containing books
-  const book = [
-    {
-      id: 1,
-      title: 'The Hunger Games',
-      author: 'Suzanne Collins',
-    },
-    {
-      id: 2,
-      title: "Harry Potter and the Sorcerer's Stone",
-      author: 'J.K. Rowling',
-    },
-    {
-      id: 3,
-      title: 'To Kill a Mockingbird',
-      author: 'Harper Lee',
-    },
-  ];
+import React from 'react';
+import PropTypes from 'prop-types';
+
+function Book(props) {
+  const { title, author } = props;
+  return (
+    <div className="book-item">
+
+      <div className="book-info">
+        <p className="genre">Action</p>
+        <h2 className="title">{title}</h2>
+        <h3 className="author">{author}</h3>
+        <ul className="interaction">
+          <li><button type="button">Comments</button></li>
+          <li><button type="button">Remove</button></li>
+          <li><button type="button">Edit</button></li>
+        </ul>
+      </div>
+
+      <div className="progress">
+        <div className="progress-bar" />
+        <div className="progress-amount">
+          <div className="percentage">80%</div>
+          <div className="status">Completed</div>
+        </div>
+      </div>
+
+      <div className="progress-details">
+        <div className="name">CURRENT CHAPTER</div>
+        <div className="current-chapter">Chapter 20</div>
+        <button type="button">Update progress</button>
+      </div>
+
+    </div>
+  );
 }
+
+Book.propTypes = {
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+};
+
+export default Book;
