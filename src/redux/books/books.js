@@ -7,12 +7,16 @@ export default function booksReducer(state = initialState, action) {
     case ADD_BOOK:
       return [
         ...state,
-        action.payload,
+        {
+          title: action.title,
+          author: action.author,
+          completed: false,
+        },
       ];
 
     case REMOVE_BOOK:
       return [
-        state.map((book) => book.id !== action.payload),
+        state.filter((book) => book.id !== action.payload),
       ];
 
     default:
@@ -21,7 +25,11 @@ export default function booksReducer(state = initialState, action) {
 }
 
 export function addBook(book) {
-  return { type: ADD_BOOK, payload: book };
+  return {
+    type: ADD_BOOK,
+    title: book.title,
+    author: book.author,
+  };
 }
 
 export function removeBook(id) {
