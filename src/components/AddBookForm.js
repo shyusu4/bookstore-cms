@@ -16,7 +16,7 @@ function AddBookForm() {
   const addBookHandler = (e) => {
     e.preventDefault();
     dispatch(addBook({
-      id: uuidv4(),
+      item_id: uuidv4(),
       title,
       author,
     }));
