@@ -2,30 +2,18 @@
 import React from 'react';
 import Book from './Book';
 import AddBookForm from './AddBookForm';
-
-const booksArr = [
-    {
-      id: 1,
-      title: 'The Great Gatsby',
-      author: 'F. Scott Fitzgerald',
-    },
-    {
-      id: 2,
-      title: 'Animal Farm',
-      author: 'George Orwell',
-    },
-    {
-      id: 3,
-      title: 'Jane Eyre',
-      author: 'Charlotte Brontë',
-    },
-];
+import { useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 function Books() {
+  const booksArr = useSelector((state) => state.books);
+
     return (
         <div>
           {booksArr.map((book) => (
-            <Book key={book.id} title={book.title} author={book.author} />
+            <div key={uuidv4()}>
+            <Book id={uuidv4()} title={book.title} author={book.author} />
+            </div>
           ))}
           <AddBookForm />
         </div>
