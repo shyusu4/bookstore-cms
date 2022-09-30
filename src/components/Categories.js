@@ -9,7 +9,7 @@ function Categories() {
   return (
     <div className="categories">
       <h1>{categories}</h1>
-      <button type="button" onClick={() => dispatch(checkStatus())}>Check status</button>
+      <button className="checkstatus-btn" type="button" onClick={() => dispatch(checkStatus())}>Check status</button>
     </div>
   );
 }
