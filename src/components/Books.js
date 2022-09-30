@@ -1,19 +1,16 @@
 /* eslint-disable */
-import React from 'react';
+import React, {useEffect} from 'react';
 import Book from './Book';
 import AddBookForm from './AddBookForm';
-import { useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Books() {
   const booksArr = useSelector((state) => state.books);
-
+  
     return (
         <div>
           {booksArr.map((book) => (
-            <div key={uuidv4()}>
-            <Book id={uuidv4()} title={book.title} author={book.author} />
-            </div>
+            <Book id={book.item_id} key={book.item_id} title={book.title} author={book.author} />
           ))}
           <AddBookForm />
         </div>

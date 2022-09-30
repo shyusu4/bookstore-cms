@@ -5,36 +5,36 @@ import { addBook } from '../redux/books/books';
 
 function AddBookForm() {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
+  const [newBook, setBook] = useState({
+    item_id: '',
+    title: '',
+    author: '',
+    category: 'Action',
+  });
 
-  const clear = () => {
-    setTitle('');
-    setAuthor('');
-  };
-
-  const addBookHandler = (e) => {
+  const submit = { ...newBook, item_id: uuidv4() };
+  const submithandler = (e) => {
     e.preventDefault();
-    dispatch(addBook({
-      id: uuidv4(),
-      title,
-      author,
-    }));
-    clear();
+    dispatch(addBook({ payload: submit, dispatch }));
+    e.reset();
   };
 
   const titleChangeHandler = (e) => {
-    setTitle(e.target.value);
+    setBook({
+      ...newBook, title: e.target.value,
+    });
   };
 
   const authorChangeHandler = (e) => {
-    setAuthor(e.target.value);
+    setBook({
+      ...newBook, author: e.target.value,
+    });
   };
 
   return (
     <div className="add-book">
       <h2>Add new book</h2>
-      <form>
+      <form onSubmit={submithandler}>
         <input
           type="text"
           className="title-input"
@@ -52,7 +52,7 @@ function AddBookForm() {
         <select name="category" className="category-select">
           <option value="" defaultValue>Category</option>
         </select>
-        <button className="submit-btn" type="submit" onClick={addBookHandler}>Add book</button>
+        <button className="submit-btn" type="submit">Add book</button>
       </form>
     </div>
   );
