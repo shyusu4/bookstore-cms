@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-// API id a0z7u9fR7yuxVcKAbO6z
-const APIurl = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/a0z7u9fR7yuxVcKAbO6z/books';
+// APIurl id = 56IrfFVkJdbMmaDysAVk
+const APIurl = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/56IrfFVkJdbMmaDysAVk/books';
 
 const ADD_BOOK = 'bookstore-cms/books/ADD_BOOK';
 const REMOVE_BOOK = 'bookstore-cms/books/REMOVE_BOOK';
@@ -11,48 +10,70 @@ const initialState = [];
 
 export default function booksReducer(state = initialState, action) {
   switch (action.type) {
-    case 'bookstore-cms/books/ADD_BOOK/fulfilled':
-      return [...state, action.book];
+    case 'bookstore-cms/books/ADD_BOOK':
+      return [...state, action.payload];
 
-    case 'bookstore-cms/books/REMOVE_BOOK/fulfilled':
-      return [
-        state.filter((book) => book.id !== action.id),
-      ];
+    case 'bookstore-cms/books/REMOVE_BOOK':
+      return state.filter((book) => book.item_id !== action.payload);
 
-    case 'bookstore-cms/books/GET_BOOK/fulfilled':
+    case 'bookstore-cms/books/GET_BOOK':
       return action.payload;
 
-    default:
-      return state;
+    default: return state;
   }
 }
 
-const addBook = createAsyncThunk(ADD_BOOK, async (book) => {
+const addBook = createAsyncThunk(ADD_BOOK, async (action) => {
+  const { payload, dispatch } = action;
   await fetch(APIurl, {
     method: 'POST',
-    body: JSON.stringify(book),
     headers: {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(payload),
   });
-  return book;
+  dispatch({
+    type: ADD_BOOK,
+    payload,
+  });
 });
 
-const removeBook = createAsyncThunk(REMOVE_BOOK, async (id) => {
-  await fetch(`${APIurl}/${id}`, {
+const removeBook = createAsyncThunk(REMOVE_BOOK, async (action) => {
+  const { id, dispatch } = action;
+  const APIurlId = `${APIurl}/${id}`;
+  await fetch(APIurlId, {
     method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      item_id: id,
+    }),
   });
-  return id;
+  dispatch({
+    type: REMOVE_BOOK,
+    payload: id,
+  });
 });
 
-const getBook = createAsyncThunk(GET_BOOK, async () => {
-  const response = await fetch(APIurl);
-  const data = await response.json();
-  const books = Object.keys(data).map((key) => ({
-    ...data[key][0],
-    item_id: key,
-  }));
-  return books;
+const getBook = createAsyncThunk(GET_BOOK, (action) => {
+  const dispatch = action;
+  fetch(APIurl).then((response) => response.json())
+    .then((data) => {
+      const books = Object.keys(data).map((key) => {
+        const book = data[key][0];
+        return {
+          item_id: key,
+          ...book,
+        };
+      });
+      dispatch({
+        type: GET_BOOK,
+        payload: books,
+      });
+    });
 });
 
 export { addBook, removeBook, getBook };

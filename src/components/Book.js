@@ -1,12 +1,11 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { removeBook } from '../redux/books/books';
 
 function Book(props) {
-  const { id, title, author } = props;
   const dispatch = useDispatch();
-
+  const { id, title, author } = props;
   return (
     <div className="book-item">
 
@@ -16,7 +15,7 @@ function Book(props) {
         <h3 className="author">{author}</h3>
         <ul className="interaction">
           <li><button type="button">Comments</button></li>
-          <li><button type="button" onClick={() => dispatch(removeBook(id))} id={id}>Remove</button></li>
+          <li><button type="button" onClick={() => dispatch(removeBook({ id, dispatch }))}>Remove</button></li>
           <li><button type="button">Edit</button></li>
         </ul>
       </div>
@@ -38,11 +37,5 @@ function Book(props) {
     </div>
   );
 }
-
-Book.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-};
 
 export default Book;
