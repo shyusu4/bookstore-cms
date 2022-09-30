@@ -176,7 +176,7 @@ input[type='text'] {
 .add-book {
   border-top: 1px solid #e8e8e8;
   padding: 1rem;
-  margin: 0 2.5rem;
+  margin: 0 2.5rem 8rem 2.5rem;
 }
 
 .add-book > h2 {
