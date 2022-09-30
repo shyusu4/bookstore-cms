@@ -3,10 +3,19 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <nav>
-      <Link to="/">BOOKS</Link>
-      <Link to="/categories">CATEGORIES</Link>
-    </nav>
+    <header>
+      <h1 className="logo">Bookstore CMS</h1>
+      <nav className="header-nav">
+        <ul>
+          <li>
+            <Link to="/">BOOKS</Link>
+          </li>
+          <li>
+            <Link to="/categories">CATEGORIES</Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 }
 

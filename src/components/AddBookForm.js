@@ -51,6 +51,13 @@ function AddBookForm() {
         />
         <select name="category" className="category-select">
           <option value="" defaultValue>Category</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+          <option value="Drama">Drama</option>
+          <option value="Romance">Romance</option>
+          <option value="History">History</option>
+          <option value="Science Fiction">Science Fiction</option>
+          <option value="Thriller">Thriller</option>
         </select>
         <button className="submit-btn" type="submit">Add book</button>
       </form>
