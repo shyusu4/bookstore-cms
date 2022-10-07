@@ -6,7 +6,7 @@
 
 ## Preview
 
-![Website preview](./mockup.png)
+![Website preview](./src/mockup.png)
 
 ## Live Demo
 
