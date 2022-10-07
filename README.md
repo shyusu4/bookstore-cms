@@ -6,14 +6,13 @@
 
 ## Live Demo
 
-[Live]()
+[Live](https://bookstorecms-shyusu4.netlify.app/)
 
 ## Built with
 
 - React
 - Redux
 - JSX
-- webpack
 
 ## Getting Started
 
@@ -44,8 +43,9 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-Microverse
+- Microverse
+- [Zeplin Design](https://app.zeplin.io/project/5b35a9e13227086040f8eb75/screen/5b695e29bb8c844f118f9378)
 
 ## 📝 License
 
-This project is [MIT]() licensed.
+This project is [MIT](https://github.com/shyusu4/Bookstore-CMS/blob/main/MIT.md) licensed.
