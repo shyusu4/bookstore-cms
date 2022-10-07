@@ -4,6 +4,10 @@
 
 > Bookstore CMS allows the user to display a list of books, add a book and remove a selected book. All the data is saved to an external API.
 
+## Preview
+
+![Website preview](./mockup.png)
+
 ## Live Demo
 
 [Live](https://bookstorecms-shyusu4.netlify.app/)
